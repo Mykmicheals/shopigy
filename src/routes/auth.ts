@@ -103,8 +103,6 @@ const passwordChange = async (req: Request, res: Response) => {
     var token = req.headers.authorization
 
     const user = await User.findOne({ userToken: token, password: oldpassword })
-    // const user = await User.findOne({ userToken: token })
-
 
 
     if (newpassword.lenght < 6) {
