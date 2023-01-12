@@ -95,7 +95,66 @@ const login = (req: Request, res: Response) => {
 }
 
 
-const forgotPassword = (req: Request, res: Response) => { }
+const sendForgotPasswordMail = async (req: Request, res: Response) => {
+    var email = req.body.email
+
+    var user = await User.findOne({ email: email })
+
+    if (user) {
+
+        var token = generateToken
+
+        var transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: process.env.EMAIL,
+                pass: process.env.PASSWORD
+            }
+        });
+
+        var mailOptions = {
+            from: process.env.EMAIL,
+            to: email,
+            subject: 'Change your password',
+            text: 'hello please copy the token below' + token
+        };
+
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log(`Email sent: ${info.response}`);
+            }
+        });
+
+    } else {
+        res.status(400).send({ error: 'user with this email does not exists' })
+    }
+
+
+
+
+}
+
+
+const validateForgotPasswordPin = async (req: Request, res: Response) => {
+    var pin = req.body.pin
+    var email = req.body.email
+
+    var user = await User.findOne({ email: email, forgotpasswordpin: pin })
+
+    if (user) {
+        res.status(200).send({ sucess: 'correct pin' })
+    } else {
+        res.status(400).send({ error: 'invalid pin' })
+    }
+}
+
+
+const changeForgotPasswor = async (req: Request, res: Response) => {
+
+
+}
 
 const passwordChange = async (req: Request, res: Response) => {
     var oldpassword = md5(req.body.oldpassword)
@@ -145,7 +204,6 @@ const sendVerificationMail = (token: string, email: string, userName: string, ho
 
 
 }
-
 
 
 
