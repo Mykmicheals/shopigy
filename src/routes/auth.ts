@@ -244,5 +244,10 @@ router.post('/passwordchange', (req, res) => {
     passwordChange(req, res)
 })
 
+router.get('/good', (req, res) => {
+    res.send('good boy')
+})
+
 export default router
+
 
