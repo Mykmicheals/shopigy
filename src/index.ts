@@ -5,6 +5,9 @@ import mongoose from 'mongoose'
 //import walletRoute from './routes/wallet.js'
 import router from './routes/auth';
 import productRoute from './routes/products';
+import * as dotenv from 'dotenv'
+
+dotenv.config()
 
 
 const DBNAME = 'Shopify'
@@ -25,7 +28,7 @@ app.use('/', productRoute)
 
 
 mongoose.set("strictQuery", false);
-mongoose.connect(`mongodb://localhost:27017/${DBNAME}`);
+mongoose.connect(`mongodb+srv://technocyUser:${process.env.DBPASSWORD}@cluster0.9bbxu.mongodb.net/?retryWrites=true&w=majority`);
 
 
 
