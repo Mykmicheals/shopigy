@@ -28,14 +28,9 @@ app.use('/', productRoute)
 
 
 mongoose.set("strictQuery", false);
-mongoose.connect(`mongodb+srv://technocyUser:${process.env.DBPASSWORD}@cluster0.9bbxu.mongodb.net/?retryWrites=true&w=majority`);
+mongoose.connect(`mongodb+srv://shopifuUser1:${process.env.DBPASSWORD}@cluster0.9bbxu.mongodb.net/?retryWrites=true&w=majority`);
 
 
-
-
-// app.get('/', (req, res) => {
-//     res.send('Hello, World!');
-// });
 
 app.get('/', (req, res) => {
     res.send('good morning')
