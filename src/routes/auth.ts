@@ -70,11 +70,11 @@ const registerUser = (req: Request, res: Response) => {
                 })
                 token.save()
                 sendVerificationMail(token.token, email, firstname, req.headers.host)
-                res.send('user registration successfull check your email for verification link')
+                res.send({ sucess: 'user registration successfull check your email for verification link' })
             })
 
         } else {
-            res.send('user email already exists, pls login with this email')
+            res.send({ error: 'user email already exists, pls login with this email' })
         }
     })
 }
@@ -204,9 +204,6 @@ const sendVerificationMail = (token: string, email: string, userName: string, ho
 
 
 }
-
-
-
 
 
 router.post('/register', (req, res) => {
